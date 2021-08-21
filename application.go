@@ -2,7 +2,7 @@ package main
 
 import (
 	"servercg/controllers"
-	"servercg/db"
+	"servercg/utils"
 	"fmt"
 	"github.com/kataras/iris/v12"
 )
@@ -21,10 +21,14 @@ func main() {
 	// -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- Rotas -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 	app.Get("/", controllers.WeAreInTheAr())
 
-	app.Post("/record", controllers.Insert())
+	app.Post("/record/insert", controllers.Insert())
+
+	app.Post("/record/update", controllers.Update())
+
+	app.Get("/record", controllers.List())
 
 	//-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ Configuração de porta e o ip/ Start app -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-	app.Run(iris.Addr(fmt.Sprint(":", db.Godotenv("port_application"))))
+	app.Run(iris.Addr(fmt.Sprint(":", utils.Godotenv("port_application"))))
 }
 
 
